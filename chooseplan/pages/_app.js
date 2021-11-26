@@ -179,7 +179,7 @@ export default function App({ Component, pageProps }) {
             <MainGrid>
               <Container>
                 <HeaderTitle>Selecione o seu plano</HeaderTitle>
-                <SubTitle>é simplesmente uma simulação de texto da indústria tipográfica e de impressos.</SubTitle>
+                <SubTitle>Em instantes você terá seu plano ativado.</SubTitle>
                 <Component {...pageProps}/>
               </Container>
             </MainGrid>
