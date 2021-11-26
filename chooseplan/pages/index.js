@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components'
 import Link from 'next/link'
 import AppContext from "./../src/context/AppContext";
+import MainGrid from './../src/components/MainGrid'
 
 const Title = styled.h1`
   font-size: 50px;
@@ -29,7 +30,7 @@ export default function Home() {
 
   return (
       <>
-        <main>
+        <MainGrid>
           <h1>Olá Mundo!</h1>
           {platforms.map((item) => {
             return  (
@@ -45,7 +46,7 @@ export default function Home() {
                 </Link>
             )
           })}
-        </main>
+        </MainGrid>
       </>
     )
 }
