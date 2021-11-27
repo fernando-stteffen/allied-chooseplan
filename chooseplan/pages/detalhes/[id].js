@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React, { useContext } from 'react';
 import styled from 'styled-components'
 import Link from 'next/link'
-import AppContext from "./../../src/context/AppContext";
+import AppContext from "../../src/context/AppContext";
 import ContainerRow from '../../src/components/ContainerRow';
 import MainGrid from '../../src/components/MainGrid';
 import Box from '../../src/components/Box';
