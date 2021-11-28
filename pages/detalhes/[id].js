@@ -5,7 +5,8 @@ import AppContext from "../../src/context/AppContext"
 import ContainerRow from "../../src/components/ContainerRow"
 import Box from "../../src/components/Box"
 import Loader from "../../src/components/Loader/indexj"
-export default function Post() {
+
+export default function Details() {
     const appStates = useContext(AppContext)
     const router = useRouter()
     const { id } = router.query
@@ -25,17 +26,13 @@ export default function Post() {
         }
         getPlans()
         setIsLoading(false)
-        if (!appStates.clientChoose.type) {
-            router.replace("/")
-        }
-        appStates.setPlanSubType(null)
     }, [id])
 
     React.useEffect(() => {
         if (appStates.clientChoose.type) {
             setTypeName(appStates.clientChoose.type.nome)
         }
-    }, [])
+    }, [appStates.clientChoose.type])
 
     return (
         <>

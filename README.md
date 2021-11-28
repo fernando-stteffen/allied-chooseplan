@@ -37,13 +37,7 @@ Apenas ter o NodeJS previamente instalado.
  cd alliedbr-front-test
 ```
 
-2. em seguida acessar a pasta do app "chooseplan"
-
-```
-  cd chooseplan
-```
-
-3. fazer a instalação de dependencias:
+2. fazer a instalação de dependencias:
 
 ```
   npm install
