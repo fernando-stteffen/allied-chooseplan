@@ -7,6 +7,10 @@ import Container from '../src/components/Container';
 import styled from 'styled-components'
 
 
+const colorTablet = "#87b3d8"
+const colorComputer = "#e74e60"
+const colorWifi = "#a7d384"
+
 const GlobalStyle = createGlobalStyle`
   /* Simple Reset CSS */
   
@@ -21,120 +25,149 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  html {
+    height: 100%;
+  }
+
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: #333;
-  }
-
-  #__next {
-    display: flex;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgb(255,255,255);
     background: linear-gradient(184deg, rgba(250,250,250,1) 0%, rgba(244,244,244,1) 100%);
   }
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
 
-  .TitleBlue {
-     color: #87b3d8;
-     text-align: center;
-     font-weight: 800;
-     font-size: 24px;
-     margin-top: 15px;
+  #__next {
+    height: 100%;
   }
 
-  .BoxTitleBlue {
-    width: 100%;
-    font-weight: 500;
-    font-size: 24px;
-    text-align: center;
-    color: #FFF;
-    background-color: #87b3d8;
-    padding: 6px 0;
-    visibility: hidden;
-  }
+  /* fallback */
 
-  .BoxBorderBlue {
-    border-top: 3px solid #87b3d8; 
-  }
-  .BoxBorderBlue:hover {
-    border: 1px solid #87b3d8; 
-  }
-
-  .TitleRed {
-    color: #e74e60;
-    text-align: center;
-    font-weight: 800;
-    font-size: 24px;
-    margin-top: 15px;
- }
-
-
-  .BoxTitleRed {
-    width: 100%;
-    font-weight: 500;
-    font-size: 24px;
-    text-align: center;
-    color: #FFF;
-    background-color: #e74e60;
-    padding: 6px 0;
-    visibility: hidden;
-  }
-  .BoxBorderRed {
-    border-top: 3px solid #e74e60; 
-  }
-  .BoxBorderRed:hover {
-    border: 1px solid #e74e60; 
-  }
-
-
-
-  .TitleGreen {
-    color: #abd788;
-    text-align: center;
-    font-weight: 800;
-    font-size: 24px;
-    margin-top: 15px;
-  }
-
-  .BoxTitleGreen {
-    width: 100%;
-    font-weight: 500;
-    font-size: 24px;
-    text-align: center;
-    color: #FFF;
-    background-color: #abd788;
-    padding: 6px 0;
-    visibility: hidden;
-  }
   
-  .BoxBorderGreen {
-    border-top: 3px solid #abd788; 
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v117/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
   }
 
-  .BoxBorderGreen:hover {
-    border: 1px solid #abd788; 
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
   }
 
 
-  .SubTitle {
-    text-align: center;
-    font-weight: 200;
-    font-size: 20px;
-    color: #333;
-    margin: 40px;
+  .BoxSelect {
+
+    @media (max-width:1025px) { 
+      width: 60%;     
+      margin-top: 15px;       
+    }
+
+    width: 30%;
+    border: 1px solid transparent;
+    border-top:  3px solid #FFF;
+
+    &:hover {
+      .Label {
+        border-top: 2px solid transparent;
+        visibility: initial;
+      }
+    }
+
+    .Label {
+      width: 100%;
+      font-weight: 500;
+      font-size: 24px;
+      text-align: center;
+      color: #FFF;
+      padding: 6px 0;
+      visibility: hidden;
+    }
+
+    .Title {
+      text-align: center;
+      font-weight: 800;
+      font-size: 24px;
+      margin-top: 15px;
+    }
+
+    .SubTitle {
+      text-align: center;
+      font-weight: 200;
+      font-size: 20px;
+      color: #333;
+      margin: 40px;
+    }
+
+    &.Tablet {
+      color: ${colorTablet};
+      border-top-color: ${colorTablet}; 
+
+      &:hover {
+        border: 1px solid ${colorTablet}; 
+
+        .Label {
+          background-color: ${colorTablet}
+        }
+      }
+
+      .Title {
+        color: ${colorTablet};
+      }
+    }
+
+    &.Computador {
+      color: ${colorComputer};
+      border-top: 3px solid ${colorComputer}; 
+
+      &:hover {
+        border: 1px solid ${colorComputer}; 
+
+        .Label {
+          background-color: ${colorComputer}
+        }
+      }
+
+      .Title {
+        color: ${colorComputer};
+      }
+    }
+
+    &.WI-FI {
+      color: ${colorWifi};
+      border-top: 3px solid ${colorWifi}; 
+
+      &:hover {
+        border: 1px solid ${colorWifi}; 
+
+        .Label {
+          background-color: ${colorWifi}
+        }
+      }
+
+      .Title {
+        color: ${colorWifi};
+      }
+    } 
+
   }
-
- 
-
-
-
-
 `
 
 const HeaderTitle = styled.h1` 
-  margin-top: 200px;
   font-family: 'Roboto', sans-serif;
   font-size: 42px;
   font-weight: 900;
@@ -164,7 +197,9 @@ export default function App({ Component, pageProps }) {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#00a300" />
           <meta name="theme-color" content="#ffffff" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>  
+          <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet"/>
           <title>ChoosePlan!</title>
         </Head>
         <GlobalStyle />

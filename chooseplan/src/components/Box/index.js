@@ -3,12 +3,10 @@ const Box = styled.div`
     background-color: #FEFEFE;
     display: flex;
     flex-direction: column;
-    margin-top: 20px; 
-    width: 300px;
-    height: 300px;
+    min-width: 300px;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
+   
     :hover {
         cursor: pointer;
     }
@@ -16,6 +14,8 @@ const Box = styled.div`
     :hover .hidden-child {
         visibility: initial;
     }
+
+
 
 `;
 

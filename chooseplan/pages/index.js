@@ -24,27 +24,28 @@ export default function Home() {
   }, [])
 
   React.useEffect(() => {
-    console.log(appStates.clientChoose)
   }, [appStates])
   
+
+
+
   return (
       <>
         <ContainerRow>
           {platforms.map((item) => {
             return  (
               <Link href={`/detalhes/${item.sku}`} passHref key={item.sku}>
-                <a onClick={() => { appStates.setPlanType(item) }}>
-                  <Box className={`
-                      ${item.nome == 'Tablet' ? 'BoxBorderBlue' : item.nome == 'Computador' ? 'BoxBorderRed' : 'BoxBorderGreen' }
-                      ${item.nome == 'Tablet' ? 'BoxBlue' : item.nome == 'Computador' ? 'BoxRed' : 'BoxGreen' }
-                      `}>
-                    <div className={`hidden-child ${item.nome == 'Tablet' ? 'BoxTitleBlue' : item.nome == 'Computador' ? 'BoxTitleRed' : 'BoxTitleGreen' }`}>Selecionar</div>
-                    <p className={`${item.nome == 'Tablet' ? 'TitleBlue' : item.nome == 'Computador' ? 'TitleRed' : 'TitleGreen' }`}>{item.nome}</p>
-                    <p className="SubTitle">
-                      {item.descricao.replace('|',' ')}
-                    </p>
+               
+                  <Box className={`BoxSelect ${item.nome}`}>
+                    <a onClick={() => { appStates.setPlanType(item) }}>
+                      <div className="Label">Selecionar</div>
+                      <p className="Title">{item.nome}</p>
+                      <p className="SubTitle">
+                        {item.descricao.replace('|',' ')}
+                      </p>
+                    </a>
                   </Box>
-                </a>
+               
               </Link>
             )
           })}

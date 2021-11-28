@@ -27,9 +27,7 @@ export default function Post() {
         }
         async function getPlans() {
           const response = await fetch(`http://private-59658d-celulardireto2017.apiary-mock.com/planos/${id}`)
-          console.log(response)
           const planJson = await response.json()
-          console.log(planJson)
           setPlans(planJson.planos)
         }
         getPlans()
