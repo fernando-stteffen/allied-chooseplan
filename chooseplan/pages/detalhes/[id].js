@@ -5,7 +5,6 @@ import AppContext from "../../src/context/AppContext"
 import ContainerRow from "../../src/components/ContainerRow"
 import Box from "../../src/components/Box"
 import Loader from "../../src/components/Loader/indexj"
-
 export default function Post() {
     const appStates = useContext(AppContext)
     const router = useRouter()
@@ -30,6 +29,7 @@ export default function Post() {
             router.replace("/")
         }
         appStates.setPlanSubType(null)
+
     }, [id])
 
     React.useEffect(() => {
@@ -71,5 +71,6 @@ export default function Post() {
                 })}
             </ContainerRow>
         </>
+
     )
 }

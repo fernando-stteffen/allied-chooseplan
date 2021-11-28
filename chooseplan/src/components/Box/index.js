@@ -7,6 +7,7 @@ const Box = styled.div`
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     margin: 15px;
+    
     :hover {
         cursor: pointer;
     }

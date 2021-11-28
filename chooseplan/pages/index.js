@@ -24,7 +24,7 @@ export default function Home() {
         appStates.setPlanType(null)
         appStates.setPlanSubType(null)
     }, [])
-
+  
     React.useEffect(() => {}, [appStates])
 
     return (
@@ -56,5 +56,6 @@ export default function Home() {
                 })}
             </ContainerRow>
         </>
+
     )
 }
