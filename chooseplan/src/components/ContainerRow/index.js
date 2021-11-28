@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-const ContainerRow = styled.div` 
+const ContainerRow = styled.div`
     width: 100%;
     /* border: 1px solid #000; */
     height: 300px;
@@ -8,8 +8,6 @@ const ContainerRow = styled.div`
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
+`
 
-`;
-
-
-export default ContainerRow;
+export default ContainerRow
