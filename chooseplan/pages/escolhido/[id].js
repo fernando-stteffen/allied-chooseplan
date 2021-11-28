@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 
@@ -7,40 +7,14 @@ import AppContext from "../../src/context/AppContext"
 import TextField from "../../src/components/FormUI/TextField"
 import DateTimePicker from "../../src/components/FormUI/DateTimePicker"
 import Button from "../../src/components/FormUI/Button"
-import ContainerRow from "../../src/components/ContainerRow"
-import Box from "../../src/components/Box"
 import FormContainer from "../../src/components/FormContainer"
 import InputBox from "../../src/components/InputBox"
+import isValidCPF from "../../src/lib/helper"
 
 const maxAge = new Date().getFullYear() - 18
-
-function isValidCPF(number) {
-    let sum
-    let rest
-    sum = 0
-    if (number == "00000000000") return false
-
-    for (let i = 1; i <= 9; i++)
-        sum = sum + parseInt(String(number).substring(i - 1, i)) * (11 - i)
-    rest = (sum * 10) % 11
-
-    if (rest == 10 || rest == 11) rest = 0
-    if (rest != parseInt(String(number).substring(9, 10))) return false
-
-    sum = 0
-    for (let i = 1; i <= 10; i++)
-        sum = sum + parseInt(String(number).substring(i - 1, i)) * (12 - i)
-    rest = (sum * 10) % 11
-
-    if (rest == 10 || rest == 11) rest = 0
-    if (rest != parseInt(String(number).substring(10, 11))) return false
-    return true
-}
-
 Yup.addMethod(Yup.number, "getCPFValid", function (errorMessage) {
     return this.test(`test-valid-cpf`, errorMessage, function (value) {
         const { path, createError } = this
-        console.log(isValidCPF(value))
         return isValidCPF(value) || createError({ path, message: errorMessage })
     })
 })
