@@ -1,54 +1,112 @@
-import { useRouter } from 'next/router'
-import React, { useContext } from 'react';
-import styled from 'styled-components'
-import Link from 'next/link'
-import AppContext from "./../../src/context/AppContext";
+import { useRouter } from "next/router"
+import React, { useContext } from "react"
+import { Formik, Form } from "formik"
+import * as Yup from "yup"
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import AppContext from "../../src/context/AppContext"
+import TextField from "../../src/components/FormUI/TextField"
+import DateTimePicker from "../../src/components/FormUI/DateTimePicker"
+import Button from "../../src/components/FormUI/Button"
+import FormContainer from "../../src/components/FormContainer"
+import InputBox from "../../src/components/InputBox"
+import isValidCPF from "../../src/lib/helper"
 
+const maxAge = new Date().getFullYear() - 18
+Yup.addMethod(Yup.number, "getCPFValid", function (errorMessage) {
+    return this.test(`test-valid-cpf`, errorMessage, function (value) {
+        const { path, createError } = this
+        return isValidCPF(value) || createError({ path, message: errorMessage })
+    })
+})
 
+const INITIAL_FORM_STATE = {
+    fullName: "",
+    email: "",
+    birthDate: "",
+    cpf: "",
+    phone: "",
+}
 
-export default function Post() {
-  const appStates = useContext(AppContext);
-  const handlePlanRequest = (e) => {
-      e.preventDefault()
-      const full_request = {
-        name: 'fernando',
-        birthdate: '15/04/1989',
-        cpf: '385.220.358-90',
-        phone: '17981350211',
-        planType: appStates.clientChoose.type,
-        planSubType: appStates.clientChoose.subType
-      }
-      console.log(full_request)
-  }
+const FORM_VALIDATION = Yup.object().shape({
+    fullName: Yup.string()
+        .required("É necessario digitar seu nome.")
+        .min(8, "Nome muito curto. Digite seu nome completo."),
+    email: Yup.string()
+        .email("informe um email.")
+        .required("Informe um email."),
+    birthDate: Yup.date()
+        .required("Informe sua data de nascimento")
+        .max(maxAge, "Você recisa ser maior de idade."),
+    cpf: Yup.number()
+        .required("Informe seu CPF")
+        .integer("Informe seu CPF")
+        .positive("CPF Inválido")
+        .getCPFValid("CPF inválido"),
+    phone: Yup.number()
+        .required("Informe um número de telefone")
+        .integer("Informe um número de telefone válido")
+        .positive("Informe um número de telefone válido")
+        .min(11, "Informe um número de telefone válido"),
+    phone: Yup.string().required("Informe um número de telefone"),
+})
+
+const Final = () => {
+    const appStates = useContext(AppContext)
+    const [typeName, setTypeName] = React.useState(["Computador"])
+    const [typeAmount, setTypeAmount] = React.useState([""])
 
     const router = useRouter()
 
-
-    React.useEffect(()  => {
-      console.log(appStates.clientChoose.type)
-      console.log(appStates.clientChoose.subType)
-      if (!appStates.clientChoose.type || !appStates.clientChoose.subType) {
-        router.replace('/')
-      }
-      console.log(appStates)
-    })
-
+    React.useEffect(() => {
+        if (!appStates.clientChoose.type || !appStates.clientChoose.subType) {
+            router.replace("/")
+        } else {
+            setTypeName(appStates.clientChoose.type.nome)
+            setTypeAmount(appStates.clientChoose.subType.franquia)
+        }
+    }, [])
 
     return (
-       <>
-            <form onSubmit={ handlePlanRequest }>
-                <input type="text" name="nome" />
-                <input type="text" name="email" />
-                <input type="text" name="cpf" />
-                <input type="text" name="telefone" />
-                <button > Enviar meu Pedido!</button>
-            </form>
-       </>
-  
+        <Formik
+            initialValues={{ ...INITIAL_FORM_STATE }}
+            validationSchema={FORM_VALIDATION}
+            onSubmit={(values) => {
+                const data = values
+                data.request = appStates.clientChoose
+                console.log(data)
+            }}
+        >
+            <Form>
+                <FormContainer className={`FormContainer ${typeName}`}>
+                    <p className="Title">{typeName}</p>
+                    <p className="SubTitle">{typeAmount}</p>
+                    <p>Informe Seus Dados</p>
+
+                    <InputBox>
+                        <TextField name="fullName" label="Nome Completo" />
+                    </InputBox>
+                    <InputBox>
+                        <TextField name="email" label="Email" />
+                    </InputBox>
+                    <InputBox>
+                        <DateTimePicker
+                            name="birthDate"
+                            label="data de nascimento"
+                        />
+                    </InputBox>
+                    <InputBox>
+                        <TextField name="cpf" label="CPF"></TextField>
+                    </InputBox>
+                    <InputBox>
+                        <TextField name="phone" label="Telefone"></TextField>
+                    </InputBox>
+                    <InputBox>
+                        <Button>Fazer pedido!</Button>
+                    </InputBox>
+                </FormContainer>
+            </Form>
+        </Formik>
     )
 }
+
+export default Final
