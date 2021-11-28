@@ -1,2 +1,0 @@
-# allied-chooseplan
-test application
