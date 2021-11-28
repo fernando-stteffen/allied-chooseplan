@@ -29,7 +29,6 @@ export default function Post() {
             router.replace("/")
         }
         appStates.setPlanSubType(null)
-
     }, [id])
 
     React.useEffect(() => {
@@ -71,6 +70,5 @@ export default function Post() {
                 })}
             </ContainerRow>
         </>
-
     )
 }
