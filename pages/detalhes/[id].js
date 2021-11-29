@@ -32,10 +32,12 @@ export default function Details() {
         if (appStates.clientChoose.type) {
             setTypeName(appStates.clientChoose.type.nome)
         }
+    })
 
     return (
         <>
             {isLoading ? <Loader></Loader> : ""}
+
             <ContainerRow>
                 {plans.map((item) => {
                     if (item.ativo) {
