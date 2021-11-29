@@ -21,8 +21,6 @@ export default function Home() {
         }
         getPlatforms()
         setIsLoading(false)
-        appStates.setPlanType(null)
-        appStates.setPlanSubType(null)
     }, [])
 
     React.useEffect(() => {}, [appStates])
