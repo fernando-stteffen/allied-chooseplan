@@ -14,7 +14,6 @@ import Loader from "../../src/components/Loader/indexj"
 import Box from "../../src/components/Box"
 import ContainerRow from "../../src/components/ContainerRow"
 
-
 const maxAge = new Date().getFullYear() - 18
 Yup.addMethod(Yup.number, "getCPFValid", function (errorMessage) {
     return this.test(`test-valid-cpf`, errorMessage, function (value) {
@@ -78,7 +77,7 @@ const Final = () => {
             {isLoading ? <Loader></Loader> : ""}
             {isComplete ? (
                 <ContainerRow>
-                    <Box className="BoxSelect WI-FI">
+                    <Box className="BoxSelect Finalizado">
                         <p className="Title">Pedido Finaliado!</p>
                         <p className="SubTitle">
                             Estamos preparando seu pedido. agora é so aguardar!
@@ -123,12 +122,18 @@ const Final = () => {
                                 />
                             </InputBox>
                             <InputBox>
-                                <TextField name="cpf" label="CPF"></TextField>
+                                <TextField
+                                    name="cpf"
+                                    label="CPF"
+                                    inputProps={{ maxLength: 11 }}
+                                ></TextField>
                             </InputBox>
                             <InputBox>
                                 <TextField
                                     name="phone"
                                     label="Telefone"
+                                    maxLength="11"
+                                    inputProps={{ maxLength: 11 }}
                                 ></TextField>
                             </InputBox>
                             <InputBox>

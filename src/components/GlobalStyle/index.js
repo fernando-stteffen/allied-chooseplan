@@ -33,7 +33,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #__next {
+
+    @media (max-width:1025px) {
+      height: auto;
+    }
+
     height: 100%;
+
   }
 
   /* fallback */
@@ -155,6 +161,36 @@ const GlobalStyle = createGlobalStyle`
 
       &:hover {
         border: 1px solid ${colorWifi};
+
+        .Label {
+          background-color: ${colorWifi}
+        }
+      }
+
+      .Title {
+        color: ${colorWifi};
+      }
+    }
+
+    &.Finalizado {
+      width: 100%;
+      padding: 20px;
+      color: ${colorWifi};
+      border-top: 3px solid ${colorWifi};
+
+
+      p {
+        text-align: center;
+        color: #333;
+      }
+      a {
+        font-weight: bold;
+        color: ${colorTablet}
+      }
+
+      &:hover {
+        border: 1px solid ${colorWifi};
+        border-top: 3px solid ${colorWifi};
 
         .Label {
           background-color: ${colorWifi}
