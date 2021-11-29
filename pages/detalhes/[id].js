@@ -31,7 +31,7 @@ export default function Details() {
         if (appStates.clientChoose.type) {
             setTypeName(appStates.clientChoose.type.nome)
         }
-    })
+    }, [appStates])
 
     return (
         <>
