@@ -14,6 +14,7 @@ import Loader from "../../src/components/Loader/indexj"
 import Box from "../../src/components/Box"
 import ContainerRow from "../../src/components/ContainerRow"
 
+
 const maxAge = new Date().getFullYear() - 18
 Yup.addMethod(Yup.number, "getCPFValid", function (errorMessage) {
     return this.test(`test-valid-cpf`, errorMessage, function (value) {

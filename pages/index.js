@@ -11,7 +11,6 @@ export default function Home() {
     const appStates = useContext(AppContext)
     const [platforms, setPlatforms] = React.useState([])
     const [isLoading, setIsLoading] = React.useState([true])
-
     React.useEffect(() => {
         async function getPlatforms() {
             const responseJson = await fetch(
