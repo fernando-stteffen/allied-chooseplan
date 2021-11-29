@@ -2,7 +2,7 @@ import { useRouter, Router } from "next/router"
 import React, { useContext } from "react"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
-
+import Link from "next/link"
 import AppContext from "../../src/context/AppContext"
 import TextField from "../../src/components/FormUI/TextField"
 import DateTimePicker from "../../src/components/FormUI/DateTimePicker"
@@ -11,6 +11,8 @@ import FormContainer from "../../src/components/FormContainer"
 import InputBox from "../../src/components/InputBox"
 import isValidCPF from "../../src/lib/helper"
 import Loader from "../../src/components/Loader/indexj"
+import Box from "../../src/components/Box"
+import ContainerRow from "../../src/components/ContainerRow"
 
 const maxAge = new Date().getFullYear() - 18
 Yup.addMethod(Yup.number, "getCPFValid", function (errorMessage) {
@@ -56,6 +58,7 @@ const Final = () => {
     const appStates = useContext(AppContext)
     const [typeName, setTypeName] = React.useState(["Computador"])
     const [typeAmount, setTypeAmount] = React.useState([""])
+    const [isComplete, setIsComplete] = React.useState(false)
 
     const router = useRouter()
 
@@ -72,48 +75,68 @@ const Final = () => {
     return (
         <>
             {isLoading ? <Loader></Loader> : ""}
-            <Formik
-                initialValues={{ ...INITIAL_FORM_STATE }}
-                validationSchema={FORM_VALIDATION}
-                onSubmit={(values) => {
-                    const data = values
-                    data.request = appStates.clientChoose
-                    console.log(data)
-                }}
-            >
-                <Form>
-                    <FormContainer className={`FormContainer ${typeName}`}>
-                        <p className="Title">{typeName}</p>
-                        <p className="SubTitle">{typeAmount}</p>
-                        <p>Informe Seus Dados</p>
+            {isComplete ? (
+                <ContainerRow>
+                    <Box className="BoxSelect WI-FI">
+                        <p className="Title">Pedido Finaliado!</p>
+                        <p className="SubTitle">
+                            Estamos preparando seu pedido. agora é so aguardar!
+                        </p>
+                        <Link href={`/`} passHref>
+                            <p>
+                                <a>Clique Aqui</a> para fazer um novo pedido.
+                            </p>
+                        </Link>
+                    </Box>
+                </ContainerRow>
+            ) : (
+                <Formik
+                    initialValues={{ ...INITIAL_FORM_STATE }}
+                    validationSchema={FORM_VALIDATION}
+                    onSubmit={(values) => {
+                        const data = values
+                        data.request = appStates.clientChoose
+                        console.log(data)
+                        setIsComplete(true)
+                    }}
+                >
+                    <Form>
+                        <FormContainer className={`FormContainer ${typeName}`}>
+                            <p className="Title">{typeName}</p>
+                            <p className="SubTitle">{typeAmount}</p>
+                            <p>Informe Seus Dados</p>
 
-                        <InputBox>
-                            <TextField name="fullName" label="Nome Completo" />
-                        </InputBox>
-                        <InputBox>
-                            <TextField name="email" label="Email" />
-                        </InputBox>
-                        <InputBox>
-                            <DateTimePicker
-                                name="birthDate"
-                                label="data de nascimento"
-                            />
-                        </InputBox>
-                        <InputBox>
-                            <TextField name="cpf" label="CPF"></TextField>
-                        </InputBox>
-                        <InputBox>
-                            <TextField
-                                name="phone"
-                                label="Telefone"
-                            ></TextField>
-                        </InputBox>
-                        <InputBox>
-                            <Button>Fazer pedido!</Button>
-                        </InputBox>
-                    </FormContainer>
-                </Form>
-            </Formik>
+                            <InputBox>
+                                <TextField
+                                    name="fullName"
+                                    label="Nome Completo"
+                                />
+                            </InputBox>
+                            <InputBox>
+                                <TextField name="email" label="Email" />
+                            </InputBox>
+                            <InputBox>
+                                <DateTimePicker
+                                    name="birthDate"
+                                    label="data de nascimento"
+                                />
+                            </InputBox>
+                            <InputBox>
+                                <TextField name="cpf" label="CPF"></TextField>
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    name="phone"
+                                    label="Telefone"
+                                ></TextField>
+                            </InputBox>
+                            <InputBox>
+                                <Button>Fazer pedido!</Button>
+                            </InputBox>
+                        </FormContainer>
+                    </Form>
+                </Formik>
+            )}
         </>
     )
 }

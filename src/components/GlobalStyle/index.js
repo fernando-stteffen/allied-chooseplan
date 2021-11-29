@@ -143,6 +143,14 @@ const GlobalStyle = createGlobalStyle`
       color: ${colorWifi};
       border-top: 3px solid ${colorWifi};
 
+      p {
+        text-align: center;
+        color: #333;
+      }
+      a {
+        font-weight: bold;
+        color: ${colorTablet}
+      }
       &:hover {
         border: 1px solid ${colorWifi};
 
