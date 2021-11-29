@@ -5,6 +5,7 @@ import AppContext from "../../src/context/AppContext"
 import ContainerRow from "../../src/components/ContainerRow"
 import Box from "../../src/components/Box"
 import Loader from "../../src/components/Loader/indexj"
+import baseUrl from "../../config"
 
 export default function Details() {
     const appStates = useContext(AppContext)
@@ -18,9 +19,7 @@ export default function Details() {
             return
         }
         async function getPlans() {
-            const response = await fetch(
-                `http://private-59658d-celulardireto2017.apiary-mock.com/planos/${id}`
-            )
+            const response = await fetch(`${baseUrl}/planos/${id}`)
             const planJson = await response.json()
             setPlans(planJson.planos)
         }
